@@ -84,8 +84,6 @@ module.exports.listAllByUser = function(req, res) {
            throw err;
        }
 
-       console.log(avatars);
-
        if(avatars && avatars.length >= 1) {
            res.json(avatars);
        }
@@ -120,10 +118,6 @@ module.exports.listByNameForUser = function(req, res) {
  * @param res
  */
 module.exports.newAvatar = function(req, res) {
-
-
-    console.log(req.body);
-
     var newAvatar = new Avatar(req.body);
     newAvatar.save();
     res.json(req.body);
@@ -132,3 +126,19 @@ module.exports.newAvatar = function(req, res) {
 // Update
 
 // Delete
+/**
+ * Deletes a character based on the given id
+ * @param req
+ * @param res
+ */
+module.exports.deleteAvatar = function(req, res) {
+
+    Avatar.findByIdAndRemove(req.params.avatarid,req.body, function(err, avatar) {
+        if(err) {
+            throw err;
+        }
+        else {
+            res.json(avatar);
+        }
+    });
+}
