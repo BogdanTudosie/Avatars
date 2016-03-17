@@ -24,7 +24,8 @@ module.exports = function(app) {
     app.get('/api/characters/findbyname/:name', avatarController.listOneByName);
     app.get('/api/characters/findbyuser/:ownerid', avatarController.listAllByUser);
     app.post('/api/characters/addavatar', avatarController.newAvatar);
-    app.delete('/api/characters/delete/:id', avatarController.deleteAvatar);
+    app.delete('/api/characters/delete/:avatarid', avatarController.deleteAvatar);
+    app.post('/api/characters/update/:avatarid', avatarController.updateAvatar);
 
     // Others
 }

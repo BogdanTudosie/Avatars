@@ -124,6 +124,36 @@ module.exports.newAvatar = function(req, res) {
 }
 
 // Update
+/**
+ * Update Avatar based on parameters sent by the HTTP request (name, description) so far.
+ * @param req
+ * @param res
+ */
+module.exports.updateAvatar = function(req, res) {
+
+    var avatarId = req.params.avatarid;
+    var name = req.body.name;
+    var description = req.body.description;
+
+    Avatar.findByIdAndUpdate(avatarId, {$set:{name: name, description: description}},function(err, avatarData) {
+       if(err) {
+           res.json({
+               message: 'An error occurred in updating the current avatar: ' + err
+           });
+       }
+
+       if(!avatarData) {
+           res.json({
+               message: 'No Data found for avatar with ID ' + avatarId
+           });
+       }
+       else {
+           res.json({
+               message: 'Updated character with id: ' + avatarId
+           });
+       }
+    });
+}
 
 // Delete
 /**
@@ -133,7 +163,7 @@ module.exports.newAvatar = function(req, res) {
  */
 module.exports.deleteAvatar = function(req, res) {
 
-    Avatar.findByIdAndRemove(req.params.avatarid,req.body, function(err, avatar) {
+    Avatar.findByIdAndRemove(req.params.avatarid, req.body, function(err, avatar) {
         if(err) {
             throw err;
         }
