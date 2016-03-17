@@ -113,7 +113,6 @@ module.exports.updateUser = function(req, res) {
 
             var user = result;
 
-
             // quick verifications for required fields
             if(!username || !role || (!username && !role)) {
                console.log('Verify username and role fields. One or both are empty');
@@ -149,7 +148,46 @@ module.exports.updateUser = function(req, res) {
 module.exports.updatePassword = function(req, res) {
 
     // Find user by email then update the password.
+    var userId = req.params.userid;
+    var oldPassword = req.body.oldpassword;
+    var newPassword = req.body.newpassword;
 
+    User.findById(userId, 'password', function(err, user) {
+        if(err) {
+            res.json({
+               message: 'Error ocurred: ' + err
+            });
+        }
+
+        console.log(user);
+
+        if(user) {
+            user.comparePassword(oldPassword, function(err, isMatch) {
+
+                if(isMatch) {
+                    user.password = newPassword;
+                    user.save(function(err){
+
+                       if(err) {
+                           res.json({
+                               message: 'Error occurred on save: ' + err
+                           });
+                       }
+                       else {
+                           res.json({
+                               message: 'Update successfully completed'
+                           }) ;
+                       }
+                    });
+                }
+                else {
+                    res.json({
+                        message: 'Invalid password for user:  ' + user.id
+                    });
+                }
+            });
+        }
+    });
 }
 
 
