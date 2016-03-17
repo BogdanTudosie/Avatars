@@ -75,9 +75,6 @@ module.exports.signIn = function(req, res) {
                        message: 'Invalid password.'
                    });
                }
-
-
-
             });
         }
     });
@@ -142,6 +139,17 @@ module.exports.updateUser = function(req, res) {
         }
 
     });
+}
+
+/**
+ * Specific post request for updating passwords.
+ * @param req
+ * @param res
+ */
+module.exports.updatePassword = function(req, res) {
+
+    // Find user by email then update the password.
+
 }
 
 
