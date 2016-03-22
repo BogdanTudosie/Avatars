@@ -9,6 +9,8 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var path = require('path');
+
 
 /*
  Define our application
@@ -21,12 +23,14 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-// Routes
-var routes = require('./server/routes/routes')(app);
 
 // app.use statements for directories
-app.use('/app', express.static(__dirname + '/app'));
 app.use('/node_modules', express.static(__dirname + '/node_modules'));
+app.use('/bower_components', express.static(__dirname + '/bower_components'));
+app.use(express.static(__dirname + '/app'));
+
+// Routes
+var routes = require('./server/routes/routes')(app);
 
 // Database connectivity
 mongoose.connect('mongodb://localhost:27017/avatars');
