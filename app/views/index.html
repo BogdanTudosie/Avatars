@@ -1,10 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="AvatarTracker">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="../bower_components/bootstrap/dist/css/bootstrap.css" />
+
+
+
 </head>
 <body>
-    <h1> Dumb Ass Placeholder </h1>
+
+    <nav class="navbar navbar-inverse navbar-static-top" ng-controller="NavController">
+        <div class="container">
+            <ul class="navbar navbar-nav navbar-left">
+                <li><a ui-sref="signup">Sign up</a></li>
+                <li><a ui-sref="mandate">Avatars' Mandate</a></li>
+                <li><a ui-sref="history">History</a></li>
+            </ul>
+
+            <form class="navbar-form navbar-right">
+                <div class="form-group">
+                    <input type="text" placeholder="E-mail address"/>
+                    <input type="password" placeholder="Password" />
+                </div>
+                <button type="submit" class="btn btn-default">Log in</button>
+            </form>
+        </div>
+    </nav>
+    <!-- main Content goes here -->
+    <div class="container">
+        <div ui-view></div>
+    </div>
+
+    <!-- scripts go here -->
+
+    <script src="../../bower_components/angular/angular.js"></script>
+    <script src="../../bower_components/angular-route/angular-route.js"></script>
+    <script src="../../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="../../bower_components/jquery/dist/jquery.js"></script>
+
+    <!-- App related Scripts -->
+
+    <script src="../app.js"></script>
+
+    <!-- controllers -->
+
+    <script src="js/controllers/main-controller.js"></script>
+    <script src="js/controllers/nav-controller.js"></script>
+
+    <!-- services -->
+
 </body>
 </html>
