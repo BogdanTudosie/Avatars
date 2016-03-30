@@ -1,0 +1,36 @@
+<div class="col-sm-8 col-sm-offset-2" ng-controller="PersProfileController" data-ng-init="findMyData()">
+    <h1>Profile placeholder</h1>
+    <div class="row">
+        <span ng-model="profile.username">Your user name: {{ profile.username }}</span>
+    </div>
+    <div class="row">
+        <span ng-model="profile.email">Registered e-mail address: {{ profile.email }}</span>
+    </div>
+    <div class="row">
+        <textarea ng-model="profile.bio"> {{ profile.bio }} </textarea>
+    </div>
+    <div class="row">
+        <span ng-model="profile.role">Your role is: {{ profile.role }}</span>
+    </div>
+
+
+    <!-- error message only -->
+    <div id="errorMessage" class="modal fade" role="dialog" ng-show="errorMessage.length > 0">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Error notification</h4>
+                </div>
+                <div class="modal-body">
+                    <p> {{ errorMessage }}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

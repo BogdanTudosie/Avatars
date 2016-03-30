@@ -2,7 +2,7 @@
 <html lang="en" ng-app="AvatarTracker">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Avatar Tracker</title>
     <link rel="stylesheet" type="text/css" href="../bower_components/bootstrap/dist/css/bootstrap.css" />
 
 
@@ -12,19 +12,27 @@
 
     <nav class="navbar navbar-inverse navbar-static-top" ng-controller="NavController">
         <div class="container">
-            <ul class="navbar navbar-nav navbar-left">
-                <li><a ui-sref="signup">Sign up</a></li>
-                <li><a ui-sref="mandate">Avatars' Mandate</a></li>
-                <li><a ui-sref="history">History</a></li>
-            </ul>
+            <div ng-show="!signedIn">
+                <a ui-sref="signup">Sign up</a>
+                <a ui-sref="about">About Avatars</a>
+                <a ui-sref="history">History</a>
+                <form class="navbar-form navbar-right">
+                    <div class="form-group">
+                        <input type="text" placeholder="E-mail address" ng-model="user.email"/>
+                        <input type="password" placeholder="Password" ng-model="user.password"/>
+                    </div>
+                    <button type="submit" class="btn btn-default" ng-click="signin()">Sign in</button>
+                </form>
+            </div>
+            <div ng-show="signedIn">
+                <a ui-sref="avatars">My Avatars</a>
+                <a ui-sref="my-feed">Home</a>
+                <a ui-sref="profile">Profile</a>
+                <form class="navbar-form navbar-right">
+                    <button type="submit" class="btn btn-default" ng-click="signout()">Sign out</button>
+                </form>
+            </div>
 
-            <form class="navbar-form navbar-right">
-                <div class="form-group">
-                    <input type="text" placeholder="E-mail address"/>
-                    <input type="password" placeholder="Password" />
-                </div>
-                <button type="submit" class="btn btn-default">Log in</button>
-            </form>
         </div>
     </nav>
     <!-- main Content goes here -->
@@ -47,6 +55,8 @@
 
     <script src="js/controllers/main-controller.js"></script>
     <script src="js/controllers/nav-controller.js"></script>
+    <script src="js/controllers/signup-controller.js"></script>
+    <script src="js/controllers/pers-profile-controller.js"></script>
 
     <!-- services -->
 

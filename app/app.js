@@ -14,5 +14,19 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
         url: "/",
         templateUrl: "views/main/main.html",
         controller: "MainController"
+    }).state('signup', {
+        url: '/signup',
+        templateUrl: '/views/signup/signup.html',
+        controller: 'SignupController'
+    }).state('about', {
+        url: '/about',
+        templateUrl: 'views/about/about.html'
+    }).state('history', {
+        url: '/history',
+        templateUrl: 'views/history/history.html'
+    }).state('profile', {
+        url: '/profile',
+        templateUrl: 'views/profile/my-profile.html',
+        controller: 'PersProfileController'
     });
 }]);

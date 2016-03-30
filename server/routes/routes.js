@@ -16,6 +16,7 @@ module.exports = function(app) {
     // User
     app.post('/api/user/signup', userController.createUser);
     app.post('/api/user/signin', userController.signIn);
+    app.post('/api/user/findme', userController.findMe);
     app.post('/api/user/update', userController.updateUser);
     app.post('/api/user/updatepassword/:userid', userController.updatePassword);
     app.delete('/api/user/delete/:id', userController.deleteUser);
