@@ -1,18 +1,32 @@
 <div class="col-sm-8 col-sm-offset-2" ng-controller="PersProfileController" data-ng-init="findMyData()">
     <h1>Profile placeholder</h1>
     <div class="row">
-        <span ng-model="profile.username">Your user name: {{ profile.username }}</span>
+        <div class="col-lg-6">
+            <span ng-model="profile.username">Your user name: {{ profile.username }}</span>
+        </div>
+        <div class="col-xs-4">
+            <button class="btn btn-default btn-info">
+                <span class="glyphicon glyphicon-edit"></span>
+            </button>
+        </div>
     </div>
     <div class="row">
-        <span ng-model="profile.email">Registered e-mail address: {{ profile.email }}</span>
+        <div class="col-lg-6">
+            <span ng-model="profile.email">Registered e-mail address: {{ profile.email }}</span>
+        </div>
     </div>
     <div class="row">
-        <textarea ng-model="profile.bio"> {{ profile.bio }} </textarea>
+        <div class="col-lg-6">
+            <textarea ng-model="profile.bio"> {{ profile.bio }} </textarea>
+        </div>
     </div>
     <div class="row">
-        <span ng-model="profile.role">Your role is: {{ profile.role }}</span>
+        <div class="col-lg-6">
+            <span ng-model="profile.role">Your role is: {{ profile.role }}</span>
+        </div>
     </div>
 
+    <button type="button" class="btn btn-default btn-success" ng-click="">Save Profile</button>
 
     <!-- error message only -->
     <div id="errorMessage" class="modal fade" role="dialog" ng-show="errorMessage.length > 0">

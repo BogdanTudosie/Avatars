@@ -89,11 +89,6 @@ module.exports.signIn = function(req, res) {
  * @param res
  */
 module.exports.findMe = function(req, res) {
-
-
-    console.log(req.params);
-    console.log(req.body);
-
     var isAuthenticated = req.body.isAuth;
     var myId = req.body.userid;
 
