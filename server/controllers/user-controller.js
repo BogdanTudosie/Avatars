@@ -67,17 +67,55 @@ module.exports.signIn = function(req, res) {
                if(isMatch) {
                    res.json({
                        email: req.body.email,
-                       id: user._id
+                       id: user._id,
+                       status: 'OK',
+                       message: 'Authentication successful'
                    });
                }
                else {
                    res.json({
+                       status: 'FAIL',
                        message: 'Invalid password.'
                    });
                }
             });
         }
     });
+}
+
+/**
+ * Retrieves profile information for current user
+ * @param req
+ * @param res
+ */
+module.exports.findMe = function(req, res) {
+    var isAuthenticated = req.body.isAuth;
+    var myId = req.body.userid;
+
+    if(isAuthenticated) {
+        User.findById(myId,'email username bio role' ,function(err, user){
+            if(err) {
+                res.json({
+                    message: 'Error occurred: ' + err
+                });
+            }
+
+            if(user) {
+                res.json(user);
+            } else {
+                res.json({
+                    status: 'FAIL',
+                    message: 'An error has occurred while retrieving your profile'
+                });
+            }
+        });
+    }
+    else {
+        res.json({
+            status: 'FAIL',
+            message: 'Please re-authenticate before retreving personal information'
+        });
+    }
 }
 
 
@@ -93,8 +131,6 @@ module.exports.updateUser = function(req, res) {
 
     // Find a user based on userId
     var bio = req.body.bio;
-    var username = req.body.username;
-    var role = req.body.role;
 
     User.findById(req.body.id, function(error, result){
 
@@ -114,14 +150,13 @@ module.exports.updateUser = function(req, res) {
             var user = result;
 
             // quick verifications for required fields
-            if(!username || !role || (!username && !role)) {
-               console.log('Verify username and role fields. One or both are empty');
+            if(!bio) {
+               res.json({
+                status: 'NO',
+                message: 'Empty Bio Passed, not updating'
+               });
             }
-            else
-            {
-                user.username = username;
-                user.role = role;
-            }
+            
 
             user.bio = bio;
 
