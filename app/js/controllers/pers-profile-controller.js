@@ -10,6 +10,7 @@ app.controller('PersProfileController', ['$scope', '$http', function($scope, $ht
     $scope.profile = {};
     $scope.errorMessage = '';
     $scope.userData = JSON.parse(localStorage.getItem('User-Data'));
+    $scope.isAdmin = false;
 
     // do we have local storage data
     if(localStorage['User-Data']) {
@@ -36,6 +37,12 @@ app.controller('PersProfileController', ['$scope', '$http', function($scope, $ht
                     $scope.errorMessage = response.message;
                 } else {
                     $scope.profile = response;
+                    if(response.role === "admin") {
+                        $scope.isAdmin = true;
+                    } 
+                    else {
+                        $scope.isAdmin = false;
+                    }
                 }
             } else {
                 console.log('No Response received');
@@ -47,4 +54,7 @@ app.controller('PersProfileController', ['$scope', '$http', function($scope, $ht
         });
     }
 
+    $scope.editProfile = function() {
+        console.log('Edit profile');
+    }
 }]);

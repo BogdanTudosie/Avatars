@@ -1,50 +1,68 @@
-<div class="col-sm-8 col-sm-offset-2" ng-controller="PersProfileController" data-ng-init="findMyData()">
-    <h1>Profile placeholder</h1>
-    <div class="row">
-        <div class="col-lg-6">
-            <span ng-model="profile.username">Your user name: {{ profile.username }}</span>
-        </div>
-        <div class="col-xs-4">
-            <button class="btn btn-default btn-info">
-                <span class="glyphicon glyphicon-edit"></span>
-            </button>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-6">
-            <span ng-model="profile.email">Registered e-mail address: {{ profile.email }}</span>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-6">
-            <textarea ng-model="profile.bio"> {{ profile.bio }} </textarea>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-6">
-            <span ng-model="profile.role">Your role is: {{ profile.role }}</span>
-        </div>
+<div class="content-fluid">
+    <div class="col-sm-6 col-md-8 col-lg-8" ng-controller="PersProfileController" data-ng-init="findMyData()">
+    <h1>{{ profile.username }}</h1>
+    <div class="col-md-8">
+        <div class="row">
+            <div class="col-md-8">
+                <span ng-model="profile.email">Registered e-mail address: {{ profile.email }}</span>
+            </div>
+            <div class="col-md-8">
+                <span ng-model="profile.bio"> {{ profile.bio }} </span>
+            </div>
+
+            <div class="col-md-8">
+                <span ng-model="profile.role">Your role is: {{ profile.role }}</span>
+            </div>
+        </div> 
+        <button type="button" class="btn btn-default btn-success" data-toggle="modal" data-target="#editProfile">Edit Profile</button> 
     </div>
 
-    <button type="button" class="btn btn-default btn-success" ng-click="">Save Profile</button>
+    <div class="col-sm-3 col-md-4 col-lg-3">
+        <div class="row">
+            <img src="../images/profile.jpg" height="150" width="130" alt="Placeholder photo" class="img-responsive img-circle">
+        </div>
+    </div>
+</div>
 
-    <!-- error message only -->
-    <div id="errorMessage" class="modal fade" role="dialog" ng-show="errorMessage.length > 0">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Error notification</h4>
-                </div>
-                <div class="modal-body">
-                    <p> {{ errorMessage }}</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
+      
+<!-- error message only -->
+<div id="errorMessage" class="modal fade" role="dialog" ng-show="errorMessage.length > 0">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Error notification</h4>
+            </div>
+            <div class="modal-body">
+                <p> {{ errorMessage }}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
+</div>
 
-
+<!-- Div shown only if Edit Profile is clicked -->
+<div id="editProfile" class="modal fade" role="dialog" ng-controller="PersProfileController" data-ng-init="findMyData()">
+    <div class="modal-dialog">
+        <div class="modal-content">      
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Edit Profile</h4>
+            </div>
+            <div class="modal-body" id="myModalBody">
+                <form id="contactform" role="form" >
+                    <div class="form-group">
+                        <input type="text" id="bio" placeholder="Enter Bio" class="form-control col-xs-12" ng-model="profile.bio">
+                            {{ profile.bio }}
+                        </input>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success" ng-click="editProfile()">Save changes</button>
+            </div>
+        </div>
+    </div>
 </div>
